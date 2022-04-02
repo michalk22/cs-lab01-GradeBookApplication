@@ -10,23 +10,20 @@ using Newtonsoft.Json.Linq;
 namespace GradeBook.GradeBooks
 {
     public class BaseGradeBook
+    public abstract class BaseGradeBook
     {
         public string Name { get; set; }
         public List<Student> Students { get; set; }
-        
-        public string type { get; set; }
+
         public GradeBookType Type { get; set; }
         public BaseGradeBook(string name)
+        public bool IsWeighted { get; set; }
+        public BaseGradeBook(string name, bool weight)
         {
+            IsWeighted = weight;
             Name = name;
             Students = new List<Student>();
-        }
-  
-        public void AddStudent(Student student)
-        {
-            if (string.IsNullOrEmpty(student.Name))
-                throw new ArgumentException("A Name is required to add a student to a gradebook.");
-            Students.Add(student);
+
         }
 
         public void RemoveStudent(string name)
